@@ -1,0 +1,97 @@
+!!! 5
+html(lang='en')
+//
+    <![endif]
+  head
+    meta(charset='utf-8')
+    //
+       Set the viewport width to device width for mobile 
+    meta(name='viewport', content='width=device-width')
+    title DataSift :: Interaction Analyzer
+    //
+       Included CSS Files 
+    link(rel='stylesheet', href='stylesheets/foundation.css')
+    link(rel='stylesheet', href='stylesheets/app.css')
+    //if lt IE 9
+      link(rel='stylesheet', href='stylesheets/ie.css')
+    //
+       IE Fix for HTML5 Tags 
+    //if lt IE 9
+      script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+    //
+       Included JS Files
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-latest.js')
+    script(type='text/javascript', src='javascripts/modernizr.foundation.js')
+    script(type='text/javascript', src='javascripts/foundation.js')
+    script(type='text/javascript', src='javascripts/d3.js')
+    script(type='text/javascript', src='javascripts/d3.geom.js')
+    script(type='text/javascript', src='javascripts/d3.layout.js')
+    script(type='text/javascript', src='javascripts/d3.time.js')
+    script(type='text/javascript', src='javascripts/d3.word.cloud.js')    
+    script(type='text/javascript', src='/javascripts/app.js')
+    script(type='text/javascript', src='/javascripts/graph-ic.js')
+    script
+     $(document).ready(function() {
+     $('#go').click(function() {
+       $.ajax({
+       type : 'POST',
+       url : '/submit',
+       data : $('#stream_creds').serialize(),
+       success : function(response) {
+       $('#ContactForm').find('.form_result').html(response);
+       }
+       });
+       });
+       });
+  body
+    //
+       container 
+    .container
+      .row
+        .eight.columns
+          img(src='images/dslogo.png')
+          h4.subheader Interaction Volume
+          .panel
+            h4
+              | Total interactions:
+              span#countTotal
+        .four.columns
+          .panel.hide-on-phones
+            form#stream_creds.nice
+             input.input-text(type='text', placeholder='User Name', name='username')
+             input.input-text(type='text', placeholder='API Key', name='apikey')
+             input.input-text(type='text', placeholder='Stream ID', name='streamid')
+           p
+            a#go.nice.radius.blue.button.mobile.src-download(href='#') Subscribe
+        .row
+          .one.columns
+          .ten.columns
+            ul.nice.tabs-content
+              li#nice1Tab.active             
+               #interactions
+               style(type='text/css')
+                svg {
+                 font: 10px sans-serif;
+                }
+                .line {
+                fill: none;
+                stroke: #333;
+                stroke-width: 1.5px;
+                }
+                .axis path, .axis line {
+                fill: none;
+                stroke: #333;
+                shape-rendering: crispEdges;
+                }
+                .text {
+                fill: #333;
+                }
+                .data-line {
+                stroke: #F00;
+                stroke-width: 2;
+                fill: none;
+                stroke-dasharray: 0;
+                } 
+        //
+           container 
