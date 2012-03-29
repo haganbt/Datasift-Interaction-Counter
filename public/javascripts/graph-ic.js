@@ -27,8 +27,7 @@ $(document).ready(function() {
 		    .interpolate("basis")
 		    .x(function(d, i) { return x(now - (n - 1 - i) * duration); })
 		    .y(function(d, i) { return y(d); });
-	
-		//var averageLine = d3.svg.line(0,0,50,50);
+
 		
 		var svg = d3.select("#interactions").append("p").append("svg")
 		    .attr("width", width + margin.left + margin.right)
